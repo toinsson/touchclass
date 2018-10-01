@@ -1,0 +1,3 @@
+[submodule "fistwriter"]
+	path = fistwriter
+	url = https://github.com/toinsson/fistwriter.git
