@@ -5,19 +5,13 @@ import numpy as np
 from sklearn import pipeline, base
 from scipy.spatial import ckdtree
 
-import warnings
-
-pcl_available = False
-try:
-    import pcl
-    pcl_available = True
-except ImportError:
-    warnings.warn("PCL not available.")
-
+import pcl
 import cv2
 
 import logging
 logger = logging.getLogger(__name__)
+
+
 
 
 class PointcloudShaper(base.BaseEstimator, base.TransformerMixin):
@@ -25,8 +19,10 @@ class PointcloudShaper(base.BaseEstimator, base.TransformerMixin):
     def transform(self, rawframes): return (frame.reshape(-1,3) for frame in rawframes)
 
 
-from pyrealsense import offline 
-offline.load_depth_intrinsics('610205001689')
+# from pyrealsense import offline
+# offline.load_depth_intrinsics('610205001689')
+import deproject
+
 
 class Step1(base.BaseEstimator, base.TransformerMixin):
     def fit(self, x, y=None): return self
@@ -42,7 +38,7 @@ class Step1(base.BaseEstimator, base.TransformerMixin):
     def transform(self, groups):
         for g in groups:
             for X in g.X:
-                pc = offline.deproject_depth(X)
+                pc = deproject.compute(X)
                 X_ = self._normalise(pc, g.mat, g.org)
                 X_ = self._filter(X_, g.ext)
                 yield X_
@@ -65,18 +61,18 @@ class VoxelGridFilter(base.BaseEstimator, base.TransformerMixin):
         return (self._transform(volume) for volume in volumes)
 
 
-class DownSampler(base.BaseEstimator, base.TransformerMixin):
-    def __init__(self, step = 8, *args):
-        super(DownSampler, self).__init__(*args)
-        self.step = step
+# class DownSampler(base.BaseEstimator, base.TransformerMixin):
+#     def __init__(self, step = 8, *args):
+#         super(DownSampler, self).__init__(*args)
+#         self.step = step
 
-    def fit(self, x, y=None): return self
+#     def fit(self, x, y=None): return self
 
-    def _transform(self, volume):
-        return volume[::self.step, :]
+#     def _transform(self, volume):
+#         return volume[::self.step, :]
 
-    def transform(self, volumes):
-        return (self._transform(volume) for volume in volumes)
+#     def transform(self, volumes):
+#         return (self._transform(volume) for volume in volumes)
 
 
 class RoiExtractor(base.BaseEstimator, base.TransformerMixin):
@@ -123,41 +119,41 @@ class RoiExtractor(base.BaseEstimator, base.TransformerMixin):
 import sklearn
 from sklearn import linear_model
 
-class FingerPlaneSegmenter(base.BaseEstimator, base.TransformerMixin):
-    """Extract the plane and the finger from the input ROI."""
-    def fit(self, x, y=None):
-        return self
+# class FingerPlaneSegmenter(base.BaseEstimator, base.TransformerMixin):
+#     """Extract the plane and the finger from the input ROI."""
+#     def fit(self, x, y=None):
+#         return self
 
-    def _transform(self, volume):
+#     def _transform(self, volume):
 
-        if volume.shape[0] < 2: return (np.zeros((1,3)), np.zeros((1,3)))
-
-
-        X, y = np.c_[np.ones(volume.shape[0]), volume[:,:2]], volume[:,2:]
-
-        linear_regression = linear_model.LinearRegression(fit_intercept=False)
-        model_ransac = linear_model.RANSACRegressor(linear_regression, residual_threshold=0.005)
-
-        try:
-            model_ransac.fit(X, y)
-        except ValueError:
-            return (np.zeros((1,3)), np.zeros((1,3)))
-
-        inlier_mask = model_ransac.inlier_mask_
-        outlier_mask = np.logical_not(inlier_mask)
-
-        plane = volume[inlier_mask]
-
-        if all(outlier_mask == False):
-            finger = np.zeros((1,3))
-        else:
-            finger = volume[outlier_mask]
-
-        return (finger, plane)
+#         if volume.shape[0] < 2: return (np.zeros((1,3)), np.zeros((1,3)))
 
 
-    def transform(self, volumes):
-        return (self._transform(volume) for volume in volumes)
+#         X, y = np.c_[np.ones(volume.shape[0]), volume[:,:2]], volume[:,2:]
+
+#         linear_regression = linear_model.LinearRegression(fit_intercept=False)
+#         model_ransac = linear_model.RANSACRegressor(linear_regression, residual_threshold=0.005)
+
+#         try:
+#             model_ransac.fit(X, y)
+#         except ValueError:
+#             return (np.zeros((1,3)), np.zeros((1,3)))
+
+#         inlier_mask = model_ransac.inlier_mask_
+#         outlier_mask = np.logical_not(inlier_mask)
+
+#         plane = volume[inlier_mask]
+
+#         if all(outlier_mask == False):
+#             finger = np.zeros((1,3))
+#         else:
+#             finger = volume[outlier_mask]
+
+#         return (finger, plane)
+
+
+#     def transform(self, volumes):
+#         return (self._transform(volume) for volume in volumes)
 
 
 class FingerPlaneExtractor(base.BaseEstimator, base.TransformerMixin):
