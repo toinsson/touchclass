@@ -1,5 +1,5 @@
 import numpy as np
-import pyrealsense2 as rs
+cimport numpy as np
 
 
 import yaml
@@ -7,41 +7,18 @@ with open('sr300_610205001689.param', 'r') as fh:
     d = yaml.load(fh)
 intr_ = d['610205001689']
 
-intr = rs.intrinsics()
-intr.coeffs = intr_['coeffs']
-intr.width  = intr_['width']
-intr.height = intr_['height']
-intr.ppx    = intr_['ppx']
-intr.ppy    = intr_['ppy']
-intr.fx     = intr_['fx']
-intr.fy     = intr_['fy']
-# intr.model  = intr_['model']
-intr.coeffs = intr_['coeffs']
-ds = intr_['depth_scale']
+# intr = rs.intrinsics()
+_coeffs = intr_['coeffs']
+_width  = intr_['width']
+_height = intr_['height']
+_ppx    = intr_['ppx']
+_ppy    = intr_['ppy']
+_fx     = intr_['fx']
+_fy     = intr_['fy']
+# _model  = intr_['model']
+_coeffs = intr_['coeffs']
+_ds     = intr_['depth_scale']
 
-
-# def compute(short[:,:]depth_image):
-
-#     # intrinsics and depth_scale are global
-#     cdef double depth_scale = ds
-
-#     cdef float[:,:,:] pointcloud = np.zeros((intr.height, intr.width, 3), dtype=np.float32)
-
-#     cdef int height = intr.height
-#     cdef int width  = intr.width
-#     cdef int dx, dy
-#     cdef float depth_value
-
-#     for dy in range(height):
-#         for dx in range(width):
-#             depth_value = depth_image[dy, dx] * depth_scale
-#             if depth_value == 0: continue
-#             res = rs.rs2_deproject_pixel_to_point(intr, [dx, dy], depth_value)
-#             for i in range(3):
-#                 pointcloud[dy, dx][i] = res[i]
-#     return pointcloud
-
-cimport numpy as np
 
 DTYPE = np.float32
 ctypedef np.float32_t DTYPE_t
@@ -49,11 +26,11 @@ ctypedef np.float32_t DTYPE_t
 def compute(short[:,:]depth_image):
 
     # intrinsics and depth_scale are global
-    cdef double depth_scale = ds
+    cdef double depth_scale = _ds
 
 
-    cdef int height = intr.height
-    cdef int width  = intr.width
+    cdef int height = _height
+    cdef int width  = _width
     cdef int dx, dy
     cdef float depth_value
 
@@ -62,15 +39,15 @@ def compute(short[:,:]depth_image):
     cdef float x,y, r2, f, ux, uy
     cdef float ppx, ppy, fx, fy, c0, c1, c2, c3, c4
 
-    ppx = intr.ppx
-    ppy = intr.ppy
-    fx  = intr.fx
-    fy  = intr.fy
-    c0  = intr.coeffs[0]
-    c1  = intr.coeffs[1]
-    c2  = intr.coeffs[2]
-    c3  = intr.coeffs[3]
-    c4  = intr.coeffs[4]
+    ppx = _ppx
+    ppy = _ppy
+    fx  = _fx
+    fy  = _fy
+    c0  = _coeffs[0]
+    c1  = _coeffs[1]
+    c2  = _coeffs[2]
+    c3  = _coeffs[3]
+    c4  = _coeffs[4]
 
     for dy in range(height):
         for dx in range(width):
