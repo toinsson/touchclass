@@ -1,6 +1,6 @@
 import numpy as np
 import vtk
-import pointobject
+from helper import pointobject
 from matplotlib.pyplot import cm
 
 

@@ -1,0 +1,11 @@
+python=3
+jupyter notebook
+matplotlib
+pandas
+h5py
+scipy
+scikit-learn
+cython
+yaml
+pyyaml
+vtk

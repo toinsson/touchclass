@@ -3,8 +3,8 @@ cimport numpy as np
 
 
 import yaml
-with open('sr300_610205001689.param', 'r') as fh:
-    d = yaml.load(fh)
+with open('./helper/deproject/sr300_610205001689.param', 'r') as fh:
+    d = yaml.load(fh, yaml.Loader)
 intr_ = d['610205001689']
 
 # intr = rs.intrinsics()
