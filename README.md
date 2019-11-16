@@ -1,6 +1,6 @@
 # touchclass
 
-This repository is meant to showcase the classfication of touch contact between a finger and an inert surface, such as a tabletop, in a video stream captured by a depth camera through a supervised learning approach.
+This repository showcases the classfication of contact between a finger and an inert surface, such as a tabletop, in a video stream produced by a depth camera, through a supervised learning approach.
 
 The targeted interaction can be observed in the video from the paper:
 
@@ -8,9 +8,9 @@ The targeted interaction can be observed in the video from the paper:
 
 A series of notebooks shows how to:
 
-- [visualise](dataset-exploration.ipynb) the dataset 
-- [extract](feature-extraction.ipynb) the features 
-- [train](model-training.ipynb) a neural network
+- [visualise](dataset-exploration.ipynb) the dataset, 
+- [extract](feature-extraction.ipynb) the features,
+- [train](model-training.ipynb) a neural network.
 
 
 # Requirements
