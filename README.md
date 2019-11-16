@@ -26,7 +26,7 @@ A series of notebooks shows how to:
 This repository includes the dataset on which the model was trained and tested. It is accessible in the [release](https://github.com/toinsson/touchclass/releases).
 
 # Related Publication
-If you want to learn more about potential applications, please refer to the associated paper [Gesture Typing on Virtual Tabletop](https://dl.acm.org/citation.cfm?id=3135074)
+If you want to learn more about potential applications, please refer to the associated paper [Gesture Typing on Virtual Tabletop](https://dl.acm.org/citation.cfm?id=3135074).
 
 ```
 @inproceedings{Loriette:2017:GTV:3132272.3135074,
