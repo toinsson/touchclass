@@ -6,6 +6,13 @@ The targeted interaction can be observed in the video from the paper:
 
 [![video](https://img.youtube.com/vi/Q8hzbU9B_k0/0.jpg)](https://www.youtube.com/watch?v=Q8hzbU9B_k0)
 
+A series of notebooks shows how to:
+
+- [visualise](dataset-exploration.ipynb) the dataset 
+- [extract](feature-extraction.ipynb) the features 
+- [train](model-training.ipynb) a neural network
+
+
 # Requirements
 
 1. install required python package from requirements.txt:
