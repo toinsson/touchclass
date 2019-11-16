@@ -21,7 +21,8 @@ This repository includes the dataset on which the model was trained and tested. 
 # Related Publication
 If you want to learn more about potential applications, please refer to the associated paper [Gesture Typing on Virtual Tabletop](https://dl.acm.org/citation.cfm?id=3135074)
 
-```@inproceedings{Loriette:2017:GTV:3132272.3135074,
+```
+@inproceedings{Loriette:2017:GTV:3132272.3135074,
  author = {Loriette, Antoine and Murray-Smith, Roderick and Stein, Sebastian and Williamson, John},
  title = {Gesture Typing on Virtual Tabletop: Effect of Input Dimensions on Performance},
  booktitle = {Proceedings of the 2017 ACM International Conference on Interactive Surfaces and Spaces},
