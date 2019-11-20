@@ -1,6 +1,9 @@
+#cython: boundscheck=False, wraparound=False, nonecheck=False
+
 import numpy as np
 cimport numpy as np
 
+import cython
 
 import yaml
 with open('./helper/deproject/sr300_610205001689.param', 'r') as fh:
@@ -23,6 +26,7 @@ _ds     = intr_['depth_scale']
 DTYPE = np.float32
 ctypedef np.float32_t DTYPE_t
 
+@cython.cdivision(True)
 def compute(short[:,:]depth_image):
 
     # intrinsics and depth_scale are global

@@ -9,3 +9,5 @@ cython
 yaml
 pyyaml
 vtk
+seaborn
+

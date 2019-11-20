@@ -20,6 +20,11 @@ These produce the model that was used for the experiment.
 1. install required python package from requirements.txt:
 `conda install --file requirements.txt`
 
+2. install additional dependencies:
+`brew install pcl`
+`pip install python-pcl`
+`conda install -c open3d-admin open3d`
+
 2. compile cython extention :`python helper/deproject/setup.py build_ext --inplace`
 
 3. install the dataset from the  at the root of the repository in the folder called `dataset`
@@ -40,4 +45,5 @@ If you want to learn more about potential applications, please refer to the asso
  series = {ISS '17},
  year = {2017},
  url = {http://doi.acm.org/10.1145/3132272.3135074},
-}```
+}
+```
