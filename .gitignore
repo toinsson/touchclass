@@ -1,6 +1,6 @@
 dataset/**hdf5
 dataset/**zip
-dataset/**pd
+# dataset/**pd
 notebooks/.ipynb_checkpoints/**
 .ipynb_checkpoints/**
 **__pycache__**

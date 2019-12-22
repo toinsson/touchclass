@@ -1,0 +1,13 @@
+,user,surface,finger,class,filename,time
+0,user_0,S3,index,touch,0.hdf5,2017-03-08_10:48:36
+1,user_0,S3,index,notouch,1.hdf5,2017-03-08_10:50:27
+2,user_0,S3,thumb,touch,2.hdf5,2017-03-08_10:52:53
+3,user_0,S3,thumb,notouch,3.hdf5,2017-03-08_10:54:12
+4,user_0,S3,pinky,touch,4.hdf5,2017-03-08_10:55:51
+5,user_0,S3,pinky,notouch,5.hdf5,2017-03-08_10:56:57
+6,user_0,S4,index,touch,6.hdf5,2017-03-08_11:01:13
+7,user_0,S4,index,notouch,7.hdf5,2017-03-08_11:02:24
+8,user_0,S4,thumb,touch,8.hdf5,2017-03-08_11:03:39
+9,user_0,S4,thumb,notouch,9.hdf5,2017-03-08_11:04:52
+10,user_0,S4,pinky,touch,10.hdf5,2017-03-08_11:09:15
+11,user_0,S4,pinky,notouch,11.hdf5,2017-03-08_11:10:23
