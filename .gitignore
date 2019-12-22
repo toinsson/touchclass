@@ -7,3 +7,6 @@ notebooks/.ipynb_checkpoints/**
 build
 helper/deproject/deproject.c
 deproject.cpython-37m-darwin.so
+helper/projection/projection.c
+projection.cpython-37m-darwin.so
+logs/*
